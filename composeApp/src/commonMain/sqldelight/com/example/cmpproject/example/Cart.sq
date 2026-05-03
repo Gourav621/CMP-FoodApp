@@ -1,0 +1,54 @@
+CREATE TABLE Cart(
+    idMeal TEXT NOT NULL PRIMARY KEY,
+    mealName TEXT NOT NULL,
+    mealThumb TEXT NOT NULL,
+    quantity INTEGER NOT NULL
+);
+
+CREATE TABLE Favorite(
+    idMeal TEXT NOT NULL PRIMARY KEY,
+    mealName TEXT NOT NULL,
+    mealThumb TEXT NOT NULL
+);
+
+getAllCartItems:
+SELECT * FROM Cart;
+
+insertCartItem:
+INSERT OR REPLACE INTO Cart(
+    idMeal,
+    mealName,
+    mealThumb,
+    quantity
+)
+VALUES (?, ?, ?, ?);
+
+deleteCartItem:
+DELETE FROM Cart
+WHERE idMeal = ?;
+
+clearCart:
+DELETE FROM Cart;
+
+updateQuantity:
+UPDATE Cart
+SET quantity = ?
+WHERE idMeal = ?;
+
+getAllFavorites:
+SELECT * FROM Favorite;
+
+insertFavorite:
+INSERT OR REPLACE INTO Favorite(
+    idMeal,
+    mealName,
+    mealThumb
+)
+VALUES (?, ?, ?);
+
+deleteFavorite:
+DELETE FROM Favorite
+WHERE idMeal = ?;
+
+isFavorite:
+SELECT EXISTS(SELECT 1 FROM Favorite WHERE idMeal = ?);
